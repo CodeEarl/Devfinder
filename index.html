@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/node_modules/flowbite/dist/flowbite.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css"  rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'light-df': '#F6F8FF',
+                        'btn': '#0079ff',
+                        'btn-h': '#0077ffa2',
+                        'l-txt': '#697C9A',
+                        'l-nmb': '#2B3442',
+                        'l-bg': '#FEFEFE',
+                        'dark': '#141D2F',
+                        'd-txt': '#FFFFFF',
+                        'd-bg': '#1E2A47', 
+                    },
+                    fontFamily: {
+                        'primary': '"Space Mono", "monospace"',
+                    }
+                }
+            },
+        } 
+
+  if (
+    localStorage.getItem('color-theme') === 'dark' ||
+    (!('color-theme' in localStorage) &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches)
+  ) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+      </script>
+</head>
+
+<body class="bg-light-df dark:bg-dark font-primary flex align-center justify-center">
+    <section class="container py-2 px-3 md:px-4 md:py-4 w-[calc(100%-2rem)] mx-auto md:w-3/4 "> 
+        <header class="flex flex-row justify-between"> 
+            <div class="logo">
+                <a href="index.html" class="logo text-2xl font-bold dark:text-d-txt">devfinder</a> 
+            </div>
+            <div class="swi">
+                <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                    <p class="flex hidden gap-2" id="theme-toggle-dark-icon">
+                        DARK 
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    </p> 
+                    <p class="flex hidden gap-2" id="theme-toggle-light-icon">
+                        LIGHT 
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                    </p>
+                </button>
+            </div>
+        </header>
+        <form class="my-7 shadow-l-txt bg-light-df rounded-[2.5rem]">   
+            <!-- <label for="default-search" class="my-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label> -->
+            <div class="relative">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-btn" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input type="search" id="search" class="block w-full p-4 pl-10 text-sm text-gray-900 border-0 focus:outline-none focus:border-0 rounded bg-l-bg dark:bg-d-bg dark:placeholder-d-txt dark:text-white" placeholder="Search GitHub Username" required>
+                
+                <button id="submit" class="text-white absolute right-2.5 bottom-2.5 z-50 bg-btn hover:bg-btn-h focus:ring-0 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 dark:focus:ring-blue-800">Search</button>
+                <span class="error text-red-700 absolute right-1 z-0 bottom-2 px-4 py-2 hidden">No results</span>
+            </div>
+        </form>
+        <section class="box bg-white shadow rounded-lg px-5 md:px-10 py-1 md:py-4 dark:bg-d-bg"> 
+            <div class="profile">
+
+                <div class="hero mt-3">
+                    <div class="top flex items-center gap-5 md:gap-8"> 
+                        <div class="avatar-box">
+                            <img src="Oval.png" alt="avatar" id="avatar" class="w-14 md:w-20">
+                        </div>
+    
+                        <div class="text">
+                            <h1 class="font-bold text-l-nmb dark:text-white" id="name">The Ococat</h1>
+                            <a href="" id="username" class="text-btn">@ocaa</a>
+                            <p id="date" class="text-l-txt">Joined...</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="about my-5">
+                    <p id="bio" class="text-l-txt">
+                        Lorem ipsum dolor sit amet consectetur if a s d  adipisicing elit. Voluptatibus, quos id? Dolorem consectetur ipsam molestiae, numquam iure provident vitae eos.
+                    </p>
+                </div> 
+            </div>
+
+            <div class="bg-light-df my-7 rounded dark:bg-dark">
+                <div class="bg-light-df dark:bg-dark stat flex justify-between w-72 mx-auto p-4 justify-between bg-light-df">
+                    <div class="rep text-center">
+                        <p class="text-l-txt">Repos</p>
+                        <h1 class="text-l-numb font-bold dark:text-white" id="repo">0</h1>
+                    </div>
+                    <div class="foll text-center">
+                        <p class="text-l-txt">Followers</p>
+                        <h1 class="text-l-numb font-bold dark:text-white" id="foll">0</h1>
+                    </div>
+                    <div class="follo text-center">
+                        <p class="text-l-txt">Following</p>
+                        <h1 class="text-l-numb font-bold dark:text-white" id="fol">0</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="social my-8 flex flex-col gap-2 ">
+                <div class="link flex gap-3">
+                    <svg class="fill-l-txt" fill="currentColor" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.089-490Q509-490 529.5-510.589q20.5-20.588 20.5-49.5Q550-589 529.411-609.5q-20.588-20.5-49.5-20.5Q451-630 430.5-609.411q-20.5 20.588-20.5 49.5Q410-531 430.589-510.5q20.588 20.5 49.5 20.5ZM480-159q133-121 196.5-219.5T740-552q0-117.79-75.292-192.895Q589.417-820 480-820t-184.708 75.105Q220-669.79 220-552q0 75 65 173.5T480-159Zm0 79Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z"/></svg>
+                    <a href="#" id="place" class="text-l-txt dark:text-white"> 
+                    San Francisco</a>
+                </div>
+                <div class="link flex gap-3">
+                    <svg class="fill-l-txt w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"/></svg>
+                    <a href="#" id="link" class="text-l-txt dark:text-white"> 
+                    https://github.blog</a>
+                </div>
+                <div class="link flex gap-3">
+                    <svg class="fill-l-txt w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+                    <a href="#" id="twitter" class="text-l-txt"> 
+                    Not available</a>
+                </div>
+                <div class="link flex gap-3">
+                    <svg class="fill-l-txt w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M480 48c0-26.5-21.5-48-48-48H336c-26.5 0-48 21.5-48 48V96H224V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V96H112V24c0-13.3-10.7-24-24-24S64 10.7 64 24V96H48C21.5 96 0 117.5 0 144v96V464c0 26.5 21.5 48 48 48H304h32 96H592c26.5 0 48-21.5 48-48V240c0-26.5-21.5-48-48-48H480V48zm96 320v32c0 8.8-7.2 16-16 16H528c-8.8 0-16-7.2-16-16V368c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16zM240 416H208c-8.8 0-16-7.2-16-16V368c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16zM128 400c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V368c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32zM560 256c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H528c-8.8 0-16-7.2-16-16V272c0-8.8 7.2-16 16-16h32zM256 176v32c0 8.8-7.2 16-16 16H208c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16zM112 160c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h32zM256 304c0 8.8-7.2 16-16 16H208c-8.8 0-16-7.2-16-16V272c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32zM112 320H80c-8.8 0-16-7.2-16-16V272c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16zm304-48v32c0 8.8-7.2 16-16 16H368c-8.8 0-16-7.2-16-16V272c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16zM400 64c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16H368c-8.8 0-16-7.2-16-16V80c0-8.8 7.2-16 16-16h32zm16 112v32c0 8.8-7.2 16-16 16H368c-8.8 0-16-7.2-16-16V176c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16z"/></svg>
+                    <a href="#" id="company" class="text-l-txt dark:text-white"> 
+                    @github</a>
+                </div>
+                 
+            </div>
+        </section>
+    </section>
+    
+</body>
+    <script src="script.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+</html>
